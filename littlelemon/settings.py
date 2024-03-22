@@ -38,9 +38,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'restaurant',
     'rest_framework',
+    'restaurant',
+    'rest_framework.authtoken',
+    'djoser'
 ]
+
+DJOSER={"USER_ID_FIELD":"username"}
+
+# settings.py
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # Other authentication classes if needed
+    ],
+    # Other REST framework settings...
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,8 +99,9 @@ DATABASES = {
         'PASSWORD':'password',
         'HOST':'localhost',
         'PORT':'3306',
+        # handles invalid or missing values from being stored in the database
         'OPTIONS':{
-            'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
+            'init_command':"SET sql_mode='STRICT_TRANS_TABLES'" 
         }
     }
 }
